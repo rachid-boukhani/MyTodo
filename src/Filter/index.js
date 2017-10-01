@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-export default class Filter extends Component {
+class Filter extends Component {
   render () {
     const {handleFilter, filter} = this.props
     return (
@@ -28,3 +29,12 @@ Filter.propTypes = {
   handleFilter: PropTypes.func,
   filter: PropTypes.string,
 }
+
+const mapStateToProps = (state) => ({
+  filter: state.filter
+})
+const mapDispatchToProps = (dispatch) => ({
+  handleFilter: (filter)=>{dispatch({type: 'UPDATE_FILTER', filter})}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

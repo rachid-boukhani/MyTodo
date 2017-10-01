@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
 let input
-export default class TodoInput extends Component {
+class TodoInput extends Component {
   render () {
     const {handleAdd} = this.props
     return (
@@ -21,3 +22,9 @@ export default class TodoInput extends Component {
 TodoInput.propTypes = {
   handleAdd: PropTypes.func
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  handleAdd: (value)=>{dispatch({type: 'ADD_TODO', value})}
+})
+
+export default connect(null, mapDispatchToProps)(TodoInput)
