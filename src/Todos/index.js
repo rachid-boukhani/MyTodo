@@ -1,20 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import { getVisibleTodos } from '../selectors'
 import TodoItem from '../TodoItem'
 
-const applyFiletr = (todos, filter) => {
-  switch (filter) {
-    case 'All':
-      return todos
-    case 'Completed':
-      return todos.filter(todo => todo.completed)
-    case 'Active':
-      return todos.filter(todo => !todo.completed)
-    default:
-      return todos
-  }
-}
 
 class Todos extends Component {
   render () {
@@ -36,7 +25,7 @@ Todos.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  todos: applyFiletr(state.todos, state.filter)
+  todos: getVisibleTodos(state)
 })
 const mapDispatchToProps = (dispatch) => ({
   handleToggle: (id)=>{dispatch({type: 'TOGGLE_TODO', id})},
